@@ -1,0 +1,473 @@
+/* Questions.css */
+
+/* ── Banner intro ── */
+.q-banner-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 220, 232, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: bannerFadeIn 0.5s ease both;
+}
+
+.q-banner-card {
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 170, 195, 0.5);
+  box-shadow:
+    0 8px 40px rgba(200, 80, 110, 0.15),
+    0 0 60px rgba(255, 180, 210, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  padding: 52px 44px 44px;
+  max-width: 340px;
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: bannerPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes bannerFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes bannerPop {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.q-banner-icon {
+  font-size: 48px;
+  animation: spin360 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.5s both;
+}
+
+@keyframes spin360 {
+  from { transform: rotate(-30deg) scale(0.5); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1);    opacity: 1; }
+}
+
+.q-banner-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 9vw, 40px);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  line-height: 1.2;
+
+  /* Brillo tipo shimmer */
+  background: linear-gradient(
+    90deg,
+    #c0415a 0%,
+    #ff8fab 40%,
+    #c0415a 60%,
+    #e8627a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear 1s infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+.q-banner-sub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: center;
+  opacity: 0.8;
+}
+
+.q-banner-btn {
+  margin-top: 8px;
+  padding: 13px 36px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(200,65,90,0.38);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.6s ease 1s both;
+}
+
+.q-banner-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 26px rgba(200,65,90,0.42);
+}
+
+/* ── Wrapper principal ── */
+.q-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  padding: 48px 20px 52px;
+  gap: 24px;
+}
+
+/* ── Progress bar ── */
+.q-progress-wrap {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeUp 0.5s ease both;
+}
+
+.q-progress-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text);
+  opacity: 0.7;
+  text-align: right;
+}
+
+.q-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(200, 100, 130, 0.2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.q-progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--color-primary-l), var(--color-primary));
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── Card pregunta ── */
+.q-card {
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 170, 195, 0.45);
+  box-shadow: var(--shadow-card);
+  padding: 36px 28px 32px;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: cardSlideIn 0.55s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes cardSlideIn {
+  from { opacity: 0; transform: translateX(40px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.q-number {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+.q-question {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 6vw, 26px);
+  font-weight: 700;
+  color: #6b2d40;
+  line-height: 1.35;
+}
+
+.q-hint {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+  opacity: 0.65;
+  font-style: italic;
+}
+
+/* ── Opciones ── */
+.q-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.q-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.7);
+  border: 2px solid rgba(200, 120, 150, 0.25);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: #7a3a50;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.q-option:hover:not(:disabled) {
+  border-color: var(--color-primary-l);
+  background: rgba(255, 200, 215, 0.35);
+  transform: translateX(4px);
+}
+
+.q-option:disabled {
+  cursor: default;
+}
+
+/* Estado: correcto */
+.q-option.correct {
+  border-color: #4caf7d;
+  background: rgba(76, 175, 125, 0.12);
+  color: #2e6b4a;
+  animation: correctPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+@keyframes correctPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* Estado: incorrecto */
+.q-option.wrong {
+  border-color: #e57373;
+  background: rgba(229, 115, 115, 0.1);
+  color: #b33a3a;
+  animation: shake 0.4s ease both;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-6px); }
+  75%       { transform: translateX(6px); }
+}
+
+/* Estado: no seleccionada después de responder */
+.q-option.dimmed {
+  opacity: 0.45;
+}
+
+.q-option-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(200, 100, 130, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.q-option.correct .q-option-letter {
+  background: #4caf7d;
+  color: white;
+}
+
+.q-option.wrong .q-option-letter {
+  background: #e57373;
+  color: white;
+}
+
+.q-option-icon {
+  margin-left: auto;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.q-option.correct .q-option-icon,
+.q-option.wrong .q-option-icon {
+  opacity: 1;
+}
+
+/* ── Feedback ── */
+.q-feedback {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4caf7d;
+  animation: fadeUp 0.3s ease both;
+  min-height: 20px;
+}
+
+.q-feedback.wrong-fb {
+  color: #e57373;
+}
+
+/* ── Botón siguiente pregunta ── */
+.q-next-btn {
+  align-self: center;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200,65,90,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.4s ease both;
+}
+
+.q-next-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(200,65,90,0.42);
+}
+
+/* ── Pantalla de celebración ── */
+.q-celebration {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.q-celebration-card {
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 32px;
+  border: 1px solid rgba(255,170,195,0.5);
+  box-shadow: var(--shadow-card);
+  padding: 52px 36px 44px;
+  max-width: 360px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: cardSlideIn 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.q-celebration-emoji {
+  font-size: 56px;
+  animation: bounceIn 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+}
+
+@keyframes bounceIn {
+  from { opacity: 0; transform: scale(0.3); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.q-celebration-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 8vw, 38px);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  background: linear-gradient(90deg, #c0415a, #ff8fab, #c0415a);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear 0.5s infinite;
+}
+
+.q-celebration-body {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.q-score-badge {
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: white;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 24px;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+}
+
+.q-celebration-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(200,100,130,0.4), transparent);
+  border-radius: 2px;
+}
+
+.q-confetti-row {
+  font-size: 22px;
+  letter-spacing: 6px;
+}
+
+.q-cel-btn {
+  padding: 13px 36px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(200,65,90,0.38);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.q-cel-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 26px rgba(200,65,90,0.42);
+}
+
+.q-cel-back {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+
+.q-cel-back:hover { opacity: 1; }
+
+/* ── Shared ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,347 @@
+/* PhotoCollage2.css */
+
+.pc2-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  padding: 44px 24px 52px;
+  gap: 28px;
+  /* Fondo rosado sólido — override del body background */
+  background: #f9c8d4;
+  overflow: hidden;
+}
+
+/* ── Blur blob detrás de la foto ── */
+.pc2-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pc2-blob-1 {
+  width: 280px;
+  height: 280px;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255,180,205,0.6) 0%, transparent 70%);
+  filter: blur(30px);
+  animation: blobPulse 5s ease-in-out infinite alternate;
+}
+
+.pc2-blob-2 {
+  width: 180px;
+  height: 180px;
+  bottom: 20%;
+  right: -20px;
+  background: radial-gradient(circle, rgba(255,160,190,0.45) 0%, transparent 70%);
+  filter: blur(24px);
+  animation: blobPulse 7s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes blobPulse {
+  from { transform: translateX(-50%) scale(1);    opacity: 0.7; }
+  to   { transform: translateX(-50%) scale(1.12); opacity: 1;   }
+}
+
+/* ── Título ── */
+.pc2-title-wrap {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 360px;
+  animation: pc2FadeDown 0.7s ease 0.2s both;
+}
+
+.pc2-title-card {
+  background: rgba(255,255,255,0.88);
+  border-radius: 16px;
+  padding: 16px 24px;
+  text-align: center;
+  box-shadow: 0 3px 16px rgba(180,80,110,0.1);
+}
+
+.pc2-title {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: clamp(22px, 7vw, 28px);
+  color: #5a3020;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+/* ── Polaroid ── */
+.pc2-polaroid-wrap {
+  position: relative;
+  z-index: 10;
+  width: min(300px, 82vw);
+  animation: pc2CardIn 0.65s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes pc2CardIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.93) rotate(-2deg); }
+  to   { opacity: 1; transform: translateY(0)    scale(1)    rotate(0deg);  }
+}
+
+.pc2-polaroid {
+  background: #fffaf8;
+  padding: 10px 10px 56px;
+  border-radius: 3px;
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.14),
+    0 1px 4px rgba(0,0,0,0.08);
+  transform: rotate(-1.5deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pc2-polaroid:hover {
+  transform: rotate(0deg) scale(1.02);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+}
+
+.pc2-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+  background: #f0d8e0;
+}
+
+/* Placeholder */
+.pc2-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  border-radius: 1px;
+}
+
+/* Caption dentro del polaroid */
+.pc2-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: #7a4a56;
+  padding: 0 12px;
+}
+
+/* ── Tape ── */
+.pc2-tape {
+  position: absolute;
+  width: 70px;
+  height: auto;
+  pointer-events: none;
+  z-index: 15;
+  opacity: 0.85;
+}
+
+.pc2-tape-tl {
+  top: -16px;
+  left: 20px;
+  transform: rotate(-12deg);
+}
+
+.pc2-tape-tr {
+  top: -16px;
+  right: 20px;
+  transform: rotate(10deg);
+}
+
+/* ── Corazones decorativos ── */
+.pc2-heart {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  animation: heartFloat ease-in-out infinite alternate;
+}
+
+.pc2-heart img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pc2-heart-1 {
+  width: 72px;
+  height: 72px;
+  top: 26%;
+  left: 4%;
+  animation-duration: 3.5s;
+  animation-delay: 0s;
+  transform: rotate(-10deg);
+}
+
+.pc2-heart-2 {
+  width: 56px;
+  height: 56px;
+  bottom: 22%;
+  right: 5%;
+  animation-duration: 4.2s;
+  animation-delay: 0.8s;
+  transform: rotate(12deg);
+}
+
+.pc2-heart-3 {
+  width: 38px;
+  height: 38px;
+  top: 12%;
+  right: 10%;
+  animation-duration: 3s;
+  animation-delay: 1.4s;
+  opacity: 0.65;
+}
+
+@keyframes heartFloat {
+  from { transform: translateY(0px) rotate(-10deg) scale(1);   }
+  to   { transform: translateY(-12px) rotate(-6deg) scale(1.06); }
+}
+
+/* ── Mensaje inferior ── */
+.pc2-message {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 300px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  border: 1px solid rgba(255,170,195,0.4);
+  padding: 14px 20px;
+  text-align: center;
+  font-size: clamp(13px, 3.5vw, 14px);
+  font-weight: 600;
+  color: #7a4050;
+  line-height: 1.6;
+  animation: pc2FadeDown 0.6s ease 0.5s both;
+  min-height: 52px;
+}
+
+/* ── Dot indicators ── */
+.pc2-dots {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pc2-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(192,65,90,0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.pc2-dot.active {
+  background: var(--color-primary);
+  width: 22px;
+  border-radius: 4px;
+}
+
+/* ── Nav ── */
+.pc2-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.pc2-btn-prev,
+.pc2-btn-next-photo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: rgba(255,255,255,0.7);
+  color: var(--color-primary);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.pc2-btn-prev:hover,
+.pc2-btn-next-photo:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: scale(1.08);
+}
+
+.pc2-btn-prev:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pc2-btn-continue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200,65,90,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pc2-btn-continue:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(200,65,90,0.4);
+}
+
+.pc2-btn-back {
+  background: transparent;
+  border: none;
+  color: #7a4050;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+
+.pc2-btn-back:hover { opacity: 1; }
+
+/* ── Slide transition ── */
+.pc2-slide-enter {
+  animation: slideIn 0.45s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(50px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* ── Shared ── */
+@keyframes pc2FadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

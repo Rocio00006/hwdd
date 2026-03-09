@@ -1,0 +1,324 @@
+/* Letter.css */
+
+/* ── Vista 1: sobre con carta ── */
+.letter-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  padding: 48px 24px;
+  gap: 32px;
+  overflow: hidden;
+}
+
+/* ── Brillo de fondo detrás del sobre ── */
+.letter-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 180, 210, 0.55) 0%,
+    rgba(255, 210, 228, 0.3) 45%,
+    transparent 70%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -58%);
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes glowPulse {
+  from { transform: translate(-50%, -58%) scale(1);   opacity: 0.8; }
+  to   { transform: translate(-50%, -58%) scale(1.15); opacity: 1;  }
+}
+
+/* Extra sparkles */
+.letter-sparkle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  font-size: 20px;
+  animation: sparkleDrift ease-in-out infinite alternate;
+  opacity: 0.7;
+}
+
+@keyframes sparkleDrift {
+  from { transform: translateY(0) rotate(-10deg) scale(1);   opacity: 0.5; }
+  to   { transform: translateY(-12px) rotate(10deg) scale(1.2); opacity: 1; }
+}
+
+/* ── Sobre SVG ── */
+.letter-envelope-wrap {
+  position: relative;
+  z-index: 10;
+  width: min(280px, 75vw);
+  cursor: pointer;
+  animation: envelopeIn 1s cubic-bezier(0.22,1,0.36,1) 0.3s both,
+             envelopeFloat 4s ease-in-out 1.5s infinite;
+  filter: drop-shadow(0 12px 28px rgba(200, 80, 110, 0.28));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.letter-envelope-wrap:hover {
+  filter: drop-shadow(0 18px 40px rgba(200, 80, 110, 0.4));
+  transform: scale(1.04) translateY(-4px);
+}
+
+@keyframes envelopeIn {
+  from { opacity: 0; transform: translateY(50px) scale(0.85) rotate(-4deg); }
+  to   { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+@keyframes envelopeFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-10px) rotate(1deg); }
+}
+
+.letter-envelope-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Botón leer carta ── */
+.letter-open-btn {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 38px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 22px rgba(200,65,90,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.7s ease 1.2s both;
+}
+
+.letter-open-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 28px rgba(200,65,90,0.45);
+}
+
+.letter-open-btn .btn-icon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.letter-open-btn:hover .btn-icon {
+  transform: rotate(20deg) scale(1.2);
+}
+
+/* ── Vista 2: carta desplegada ── */
+.letter-content-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  padding: 48px 20px 56px;
+  gap: 24px;
+  overflow: hidden;
+}
+
+/* Entrada */
+.letter-content-wrapper.entering {
+  animation: contentReveal 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes contentReveal {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Título RECUERDA ── */
+.letter-title {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: clamp(52px, 15vw, 72px);
+  letter-spacing: 4px;
+  color: var(--color-primary);
+  text-align: center;
+  line-height: 1;
+  text-shadow:
+    0 4px 0 rgba(192,65,90,0.22),
+    0 8px 24px rgba(192,65,90,0.15);
+  animation: titleBounce 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+}
+
+@keyframes titleBounce {
+  from { opacity: 0; transform: scale(0.7) translateY(-10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Papel de carta (estilo nota rasgada arriba) ── */
+.letter-paper {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: #f9f5ee;
+  border-radius: 0 0 8px 8px;
+  box-shadow:
+    0 6px 28px rgba(0,0,0,0.1),
+    0 1px 4px rgba(0,0,0,0.07);
+  padding: 32px 28px 36px;
+  animation: paperSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+}
+
+@keyframes paperSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Borde rasgado en la parte superior — CSS puro */
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background:
+    radial-gradient(circle at 8px 18px,  transparent 12px, #f9f5ee 12px) -4px 0,
+    radial-gradient(circle at 8px 18px,  transparent 12px, #f9f5ee 12px);
+  background-size: 24px 18px;
+  background-repeat: repeat-x;
+}
+
+/* Líneas de papel */
+.letter-paper::after {
+  content: '';
+  position: absolute;
+  inset: 32px 0 0 0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    rgba(200, 150, 170, 0.18) 27px,
+    rgba(200, 150, 170, 0.18) 28px
+  );
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+}
+
+/* ── Líneas del mensaje ── */
+.letter-lines {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.letter-line {
+  font-family: var(--font-body);
+  font-size: clamp(20px, 3.8vw, 25px);
+  font-weight: 600;
+  color: #4a3040;
+  text-align: center;
+  line-height: 28px; /* alineado con las líneas del papel */
+  opacity: 0;
+  animation: lineIn 0.5s ease forwards;
+}
+
+/* Primer "párrafo" — negrita */
+.letter-line.highlight {
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 16px);
+  color: #3a2030;
+  margin-bottom: 4px;
+}
+
+.letter-line.spacer {
+  height: 14px;
+}
+
+/* ── Firma ── */
+.letter-signature {
+  text-align: center;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: lineIn 0.6s ease 2.5s forwards;
+}
+
+.letter-signature span {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--color-primary);
+}
+
+/* ── Nav ── */
+.letter-nav {
+  display: flex;
+  gap: 12px;
+  animation: fadeUp 0.6s ease 2.8s both;
+}
+
+.letter-btn-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200,65,90,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.letter-btn-next:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(200,65,90,0.4);
+}
+
+.letter-btn-back {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+  padding: 12px 16px;
+}
+
+.letter-btn-back:hover { opacity: 1; }
+
+/* ── Shared ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lineIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

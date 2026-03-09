@@ -1,0 +1,211 @@
+/* PhotoCollage.css */
+
+.pc-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  padding: 48px 16px 60px;
+  gap: 8px;
+}
+
+/* ── Fondo propio del collage ── */
+.pc-wrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/src/media/background2demob.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Título ── */
+.pc-title-wrap {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 12px;
+  animation: pcFadeDown 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+}
+
+.pc-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 9vw, 44px);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-shadow: 0 2px 12px rgba(200,65,90,0.18);
+  line-height: 1.2;
+}
+
+.pc-title-sub {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.75;
+}
+
+/* ── Scroll feed ── */
+.pc-feed {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+  max-width: 400px;
+  padding-bottom: 8px;
+}
+
+/* ── Polaroid card ── */
+.pc-polaroid {
+  position: relative;
+  background: #fffaf8;
+  border-radius: 3px;
+  padding: 10px 10px 32px 10px;
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.12),
+    0 1px 3px rgba(0,0,0,0.08);
+  width: min(310px, 88vw);
+  opacity: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pc-polaroid:hover {
+  box-shadow:
+    0 10px 28px rgba(0,0,0,0.16),
+    0 2px 6px rgba(0,0,0,0.1);
+  z-index: 20;
+}
+
+/* Each polaroid gets a slight rotation — set via inline style */
+.pc-polaroid.visible {
+  animation: polaroidIn 0.65s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes polaroidIn {
+  from {
+    opacity: 0;
+    transform: var(--rot) translateY(36px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: var(--rot) translateY(0) scale(1);
+  }
+}
+
+/* ── Photo inside polaroid ── */
+.pc-photo {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+  background: #e8d8de;
+  /* Placeholder color while loading */
+}
+
+/* ── Tape pieces ── */
+.pc-tape {
+  position: absolute;
+  width: 64px;
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.88;
+}
+
+/* Top-left tape */
+.pc-tape-tl {
+  top: -14px;
+  left: 18px;
+  transform: rotate(-12deg);
+}
+
+/* Top-right tape */
+.pc-tape-tr {
+  top: -14px;
+  right: 18px;
+  transform: rotate(10deg);
+}
+
+/* Bottom-left tape (alternate photos) */
+.pc-tape-bl {
+  bottom: 20px;
+  left: 14px;
+  transform: rotate(8deg);
+}
+
+/* ── Caption under photo ── */
+.pc-caption {
+  margin-top: 10px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: #7a4a56;
+  letter-spacing: 0.3px;
+  min-height: 20px;
+}
+
+/* ── Nav ── */
+.pc-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  animation: pcFadeDown 0.7s ease 0.4s both;
+}
+
+.pc-btn-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200,65,90,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pc-btn-next:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(200,65,90,0.4);
+}
+
+.pc-btn-back {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+  padding: 12px 16px;
+}
+
+.pc-btn-back:hover { opacity: 1; }
+
+/* ── Shared ── */
+@keyframes pcFadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

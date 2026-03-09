@@ -1,0 +1,350 @@
+/* Crossword.css */
+
+.cw-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-body);
+  padding: 44px 16px 56px;
+  gap: 28px;
+}
+
+/* ── Banner título ── */
+.cw-banner {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,170,195,0.4);
+  box-shadow: 0 4px 20px rgba(200,80,110,0.1);
+  padding: 14px 28px;
+  text-align: center;
+  animation: fadeDown 0.7s ease 0.2s both;
+  max-width: 340px;
+  width: 100%;
+}
+
+.cw-banner p {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 5.5vw, 22px);
+  font-weight: 700;
+  color: #5a2d3a;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Grid container ── */
+.cw-grid-wrap {
+  position: relative;
+  animation: fadeDown 0.7s ease 0.4s both;
+}
+
+.cw-grid {
+  display: grid;
+  gap: 3px;
+  /* columns y rows se definen inline según tamaño */
+}
+
+/* ── Celda base ── */
+.cw-cell {
+  width: 38px;
+  height: 38px;
+  position: relative;
+}
+
+/* Celda vacía (no forma parte de ninguna palabra) */
+.cw-cell.empty {
+  background: transparent;
+}
+
+/* Celda activa (parte de una palabra) */
+.cw-cell.active {
+  background: #fff;
+  border: 2px solid #e8a0b0;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(200,80,110,0.1);
+}
+
+/* Celda intersección (compartida por dos palabras) */
+.cw-cell.intersection {
+  background: #fff8fa;
+  border-color: #d07090;
+}
+
+/* Celda correcta */
+.cw-cell.correct-cell {
+  background: rgba(76,175,125,0.12);
+  border-color: #4caf7d;
+  animation: correctCellPop 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+@keyframes correctCellPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Celda incorrecta */
+.cw-cell.wrong-cell {
+  background: rgba(229,115,115,0.1);
+  border-color: #e57373;
+  animation: shake 0.35s ease both;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+
+/* Número de pista en la esquina */
+.cw-cell-number {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-primary);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Input dentro de la celda */
+.cw-cell input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: #4a2030;
+  text-transform: uppercase;
+  caret-color: var(--color-primary);
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+}
+
+.cw-cell input:focus {
+  background: rgba(255,180,200,0.18);
+  border-radius: 4px;
+}
+
+/* Celda resuelta — muestra la letra, no editable */
+.cw-cell.solved input {
+  color: #2e6b4a;
+  font-weight: 800;
+}
+
+/* ── Botón verificar ── */
+.cw-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: fadeUp 0.6s ease 0.6s both;
+}
+
+.cw-btn-check {
+  padding: 13px 36px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200,65,90,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cw-btn-check:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(200,65,90,0.4);
+}
+
+.cw-btn-reveal {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.cw-btn-reveal:hover { opacity: 1; }
+
+/* ── Feedback mensaje ── */
+.cw-feedback {
+  font-size: 14px;
+  font-weight: 700;
+  color: #4caf7d;
+  text-align: center;
+  animation: fadeUp 0.3s ease both;
+}
+
+.cw-feedback.error { color: #e57373; }
+
+/* ── Pistas ── */
+.cw-clues {
+  width: 100%;
+  max-width: 340px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,170,195,0.35);
+  padding: 20px 24px;
+  animation: fadeUp 0.7s ease 0.5s both;
+}
+
+.cw-clues-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.cw-clue {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(200,130,155,0.15);
+  font-size: 14px;
+  font-weight: 600;
+  color: #5a3040;
+  line-height: 1.4;
+}
+
+.cw-clue:last-child { border-bottom: none; }
+
+.cw-clue-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cw-clue.solved-clue .cw-clue-num {
+  background: #4caf7d;
+}
+
+.cw-clue.solved-clue span:last-child {
+  color: #4caf7d;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* ── Nav ── */
+.cw-nav {
+  display: flex;
+  gap: 12px;
+  animation: fadeUp 0.6s ease 0.8s both;
+}
+
+.cw-btn-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, var(--color-primary-l), var(--color-primary));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200,65,90,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cw-btn-next:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(200,65,90,0.4);
+}
+
+.cw-btn-back {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+  padding: 12px 16px;
+}
+
+.cw-btn-back:hover { opacity: 1; }
+
+/* ── Shared ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Number badges outside the grid ── */
+.cw-grid-outer {
+  animation: fadeDown 0.7s ease 0.4s both;
+}
+
+.cw-num-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.cw-arrow {
+  font-size: 10px;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.cw-num-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(200,65,90,0.35);
+}
+
+/* Remove old in-cell number style since we no longer use it */
+.cw-cell-number { display: none; }
