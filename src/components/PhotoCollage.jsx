@@ -10,6 +10,9 @@ import foto4 from "../media/foto4.webp";
 import foto5 from "../media/foto5.webp";
 import foto6 from "../media/foto6.webp";
 import foto7 from "../media/foto7.webp";
+import foto41 from "../media/foto41.webp";
+import foto42 from "../media/foto42.webp";
+import foto43 from "../media/foto43.webp";
 
 // ...
 
@@ -23,13 +26,16 @@ const PLACEHOLDER_COLORS = [
 // Cuando tengas las fotos, reemplaza `src` con el import real:
 // src: foto1, src: foto2, etc.
 const PHOTOS = [
-  { id: 1,  src: foto1, caption: "" },
-  { id: 2,  src: foto2, caption: "" },
-  { id: 3,  src: foto3, caption: "" },
-  { id: 4,  src: foto4, caption: "" },
-  { id: 5,  src: foto5, caption: "" },
-  { id: 6,  src: foto6, caption: "" },
-  { id: 7,  src: foto7, caption: "" },
+  { id: 1,  src: foto1, caption: "1. Una aventura en Arequipa" },
+  { id: 2,  src: foto2, caption: "2. Las 3 con lentes" },
+  { id: 3,  src: foto3, caption: "3. En la playita" },
+  { id: 4,  src: foto4, caption: "4. Un corazón de 3" },
+  { id: 5,  src: foto5, caption: "5. Con Ubitas" },
+  { id: 6,  src: foto6, caption: "6. Con la vista del mar" },
+  { id: 7,  src: foto7, caption: "7. Lupecita con los lobos de mar" },
+  { id: 8,  src: foto41, caption: "8. Con sus hijitas" },
+  { id: 9,  src: foto42, caption: "9. De vacaciones" },
+  { id: 10,  src: foto43, caption: "10. Con la familia" },
 ];
 
 // Rotaciones alternadas para el efecto collage
@@ -42,6 +48,9 @@ const TAPE_CONFIG = [
   ["tl", "tr"],
   ["tl", "tr"],
   ["tl", "tr"],
+  ["tl", "tr"],
+  ["tl", "tr"],
+    ["tl", "tr"],
   ["tl", "tr"],
   ["tl", "tr"],
 ];

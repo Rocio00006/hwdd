@@ -12,6 +12,18 @@ import foto11 from "../media/foto11.webp";
 import foto12 from "../media/foto12.webp";
 import foto13 from "../media/foto13.webp";
 import foto14 from "../media/foto14.webp";
+import foto15 from "../media/foto15.webp";
+import foto16 from "../media/foto16.webp";
+import foto17 from "../media/foto17.webp";
+import foto18 from "../media/foto18.webp";
+import foto19 from "../media/foto19.webp";
+import foto20 from "../media/foto20.webp";
+import foto21 from "../media/foto21.webp";
+import foto22 from "../media/foto22.webp";
+import foto23 from "../media/foto23.webp";
+import foto24 from "../media/foto24.webp";
+
+
 // Para ahora usamos colores placeholder.
 
 const PLACEHOLDER_COLORS = ["#f5c2ce", "#f9d4bb", "#c8e6c9", "#bbdefb"];
@@ -47,31 +59,103 @@ const PHOTOS = [
     placeholderColor: PLACEHOLDER_COLORS[3],
     placeholderEmoji: "💐",
     caption: "Para siempre",
-    message: "Este recuerdo, como todos los que compartimos contigo, vive en nuestros corazones. 💖",
+    message: "Siempre fuiste un ejemplo de maestra.",
   },
   {
     id: 5,
     src: foto12,
     placeholderColor: PLACEHOLDER_COLORS[3],
     placeholderEmoji: "💐",
-    caption: "Para siempre",
-    message: "Este recuerdo, como todos los que compartimos contigo, vive en nuestros corazones. 💖",
+    caption: "Con pequeña mari",
+    message: "Este recuerdo, como todos los que compartimos contigo, vive en nuestros corazones.",
   },
   {
     id: 6,
     src: foto13,
     placeholderColor: PLACEHOLDER_COLORS[3],
     placeholderEmoji: "💐",
-    caption: "Para siempre",
-    message: "Este recuerdo, como todos los que compartimos contigo, vive en nuestros corazones. 💖",
+    caption: "Un viaje lleno de polvo",
+    message: "Lindos momentos",
   },
   {
     id: 7,
     src: foto14,
     placeholderColor: PLACEHOLDER_COLORS[3],
     placeholderEmoji: "💐",
+    caption: "En navidad",
+    message: "Con chio grande. ",
+  },
+    {
+    id: 8,
+    src: foto15,
+    placeholderColor: PLACEHOLDER_COLORS[0],
+    placeholderEmoji: "🌸",
+    caption: "En el cumple de mari",
+    message: "Recuerdas el baile de 15?",
+  },
+  {
+    id: 9,
+    src: foto17,
+    placeholderColor: PLACEHOLDER_COLORS[1],
+    placeholderEmoji: "☕",
+    caption: "Con ubitas",
+    message: "El azul te queda re bien",
+  },
+  {
+    id: 10,
+    src: foto18,
+    placeholderColor: PLACEHOLDER_COLORS[2],
+    placeholderEmoji: "🌺",
+    caption: "Con ubitas",
+    message: "Después del trabajo?",
+  },
+  {
+    id: 11,
+    src: foto19,
+    placeholderColor: PLACEHOLDER_COLORS[3],
+    placeholderEmoji: "💐",
     caption: "Para siempre",
-    message: "Este recuerdo, como todos los que compartimos contigo, vive en nuestros corazones. 💖",
+    message: "Este recuerdo, vive en nuestros corazones.",
+  },
+  {
+    id: 12,
+    src: foto20,
+    placeholderColor: PLACEHOLDER_COLORS[3],
+    placeholderEmoji: "💐",
+    caption: "Con roci",
+    message: "Después del desfile",
+  },
+  {
+    id: 13,
+    src: foto21,
+    placeholderColor: PLACEHOLDER_COLORS[3],
+    placeholderEmoji: "💐",
+    caption: "Con la familia",
+    message: "Una navidad con canciones",
+  },
+  {
+    id: 14,
+    src: foto22,
+    placeholderColor: PLACEHOLDER_COLORS[3],
+    placeholderEmoji: "💐",
+    caption: "Con chio",
+    message: "Día de actuación",
+  },
+  {
+    id: 15,
+    src: foto23,
+    placeholderColor: PLACEHOLDER_COLORS[3],
+    placeholderEmoji: "💐",
+    caption: "Que linda te vez",
+    message: "Hace algunos años",
+  },
+  {
+    id: 14,
+    src: foto24,
+    placeholderColor: PLACEHOLDER_COLORS[3],
+    placeholderEmoji: "💐",
+    caption: "Con mari",
+    message: "Cómo pasan los años",
   },
 ];
 
